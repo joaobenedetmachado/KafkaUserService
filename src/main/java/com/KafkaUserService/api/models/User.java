@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
+//Aqui criamos o model do usuario, que é a estrutura da classe
 @Table(name = "users")
 public class User {
 

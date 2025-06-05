@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.KafkaUserService.api.kafka.UserProducer;
 import java.util.List;
 
+//aqui "linkamos" as funcoes do jpa repository para a nossa logica com o service
 public class UserService {
 
     @Autowired
@@ -14,13 +15,17 @@ public class UserService {
     @Autowired
     private UserProducer userProducer;
 
+    //lista os usuarios
     public List<User> listarUsuarios() {
         return userRepository.findAll();
     }
 
+    //aqui é diferente:
     public User salvarUsuario(User usuario) {
+        // colocamos ele numa variavel e a salvamos com o Repository
         User usersalvo = userRepository.save(usuario);
+        // chamamos o kafka, e "salvamos" ele la
         userProducer.enviarParaKafka(usersalvo);
-        return usersalvo;
+        return usersalvo; // retornamos o user, so pra retornar algo mesmo
     }
 }
