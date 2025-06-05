@@ -16,22 +16,16 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private Boolean ativo;
 
     public User() {}
 
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+    public Integer getId() {
+        return id;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -56,5 +50,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public User(Integer id, String name, String email, String password, Boolean ativo) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.ativo = ativo;
     }
 }

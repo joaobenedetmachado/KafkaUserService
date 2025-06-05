@@ -30,4 +30,18 @@ public class UserController {
         return ResponseEntity.ok(userService.listarUsuarios());
     }
 
+    @GetMapping("/user/confirm")
+    public ResponseEntity<String> confirmarEmail(@RequestParam String email) {
+        Optional<User> optionalUser = userService.buscarPorEmail(email);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setAtivo(true);
+            userService.salvarUsuario(user);
+            return ResponseEntity.ok("conta confirmada");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("usuario não encontrado");
+        }
+    }
+
 }
